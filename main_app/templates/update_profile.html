@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block styles %}
+<!-- Local Styles -->
+<link rel="stylesheet" href="{% static 'styles/update_profile.css' %}" />
+
+<!-- Rich text editor (Quill)-->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+{% endblock %}
+
+{% block script %}
+<!-- Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+
+<!-- Local Scripts-->
+<script src="{% static 'scripts/editor.js' %}" defer></script>
+{% endblock %}
+
+
+{% block title %} Update Profile {% endblock %}
+</head>
+<body>
+
+{% block content %}
+
+  <h1>Update Your Profile</h1>
+  <container>
+    <section class="profile-left">
+      <span class="photo-upload-img">
+        <img src="https://p7.hiclipart.com/preview/981/645/182/united-states-computer-icons-desktop-wallpaper-clip-art-free-high-quality-person-icon-thumbnail.jpg"></img>
+      </span>
+      <div class="photo-upload">
+        <button class="photo-upload-button">Upload Photo</button>
+      </div>
+      <div class="connect-insta">
+        <button class="connect-insta-button">Connect Instagram</button>
+      </div>
+    </section>
+
+
+
+    <section class="profile-right">
+      <span class="zip-code">
+        <label for="location">Location:</label><input name="location" type="text">
+      </span>
+      <span class="about-me">
+        <label for="about-me">About Me:</label>
+        <div id="editor">
+          <p>Hello World!</p>
+          <p>Some initial <strong>bold</strong> text</p>
+          <p><br></p>
+        </div>
+      </span>
+    </section>
+  </container>
+
+
+{% endblock %}
+</body>
+</html>

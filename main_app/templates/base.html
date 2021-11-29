@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- Local Styles -->
+  <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
+
+  {% block styles %} {% endblock %}
+
+  <!-- Local Scripts-->
+  <script src="{% static 'scripts/script.js' %}" defer></script>
+
+    {% block script %} {% endblock %}
+
+
+
+
+  <title>Collective - {% block title %} {% endblock %}</title>
+</head>
+<body>
+
+  {% if user.is_authenticated %}
+
+  <nav class="navbar">
+  <div class="nav-start">
+    <div class="logo"><a href={{"/"}}>Collective</a></div>
+    <div class="dropdown">
+      <button class="about-dropbtn">About
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="{% url 'about' %}">About Collective</a>
+        <a href="{% url 'about-dev' %}">About Dev</a>
+      </div>
+    </div>
+  </div>
+    <a href="#" class="toggle-button">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </a>
+    <div class="navbar-links">
+      <ul class="nav-container">
+        <li>Welcome, <a href="/profile" class="nav-item">{{user.username}}</a></li>
+        <li><a href="{% url 'logout' %}" class="nav-item">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  {% else %}
+
+  <nav class="navbar">
+  <div class="nav-start">
+    <div class="logo"><a href={{"/"}}>Collective</a></div>
+    <div class="dropdown">
+      <button class="about-dropbtn">About
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="{% url 'about' %}">About Collective</a>
+        <a href="{% url 'about-dev' %}">About Dev</a>
+      </div>
+    </div>
+  </div>
+    <a href="#" class="toggle-button">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </a>
+    <div class="navbar-links">
+      <ul class="nav-container">
+        <li><a href="{% url 'login' %}" class="nav-item">Log In</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  {% endif %}
+
+  <main>
+  
+    {% block content %}{% endblock %}
+  
+  </main>
+
+  <footer>This is the footer</footer>
+
+</body>
+</html>
