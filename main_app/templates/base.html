@@ -41,7 +41,7 @@
       </button>
       <div class="dropdown-content">
         <a href="{% url 'about' %}">About Collective</a>
-        <a href="{% url 'about-dev' %}">About Dev</a>
+        <a href="{% url 'about_dev' %}">About Dev</a>
       </div>
     </div>
   </div>
@@ -52,7 +52,7 @@
     </a>
     <div class="navbar-links">
       <ul class="nav-container">
-        <li>Welcome, <a href="/profile" class="nav-item">{{user.username}}</a></li>
+        <li>Welcome, <a href="{% url 'profile' user.pk %}" class="nav-item">{{user.username}}</a></li>
         <li><a href="{% url 'logout' %}" class="nav-item">Logout</a></li>
       </ul>
     </div>
@@ -69,7 +69,7 @@
       </button>
       <div class="dropdown-content">
         <a href="{% url 'about' %}">About Collective</a>
-        <a href="{% url 'about-dev' %}">About Dev</a>
+        <a href="{% url 'about_dev' %}">About Dev</a>
       </div>
     </div>
   </div>

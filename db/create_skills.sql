@@ -1,6 +1,3 @@
-/* INSERT INTO main_app_skill(name)
-  VALUES (''); */
--- "psql collective -f db/create_skills.sql" = ERROR: relation "main_app_skill" does not exist
 
 INSERT INTO main_app_skill(name)
   VALUES ('Painting');

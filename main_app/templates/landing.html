@@ -1,0 +1,150 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- Local Styles -->
+  <link rel="stylesheet" href="{% static 'styles/landing.css' %}" />
+
+  <!-- Local Scripts-->
+  <script src="{% static 'scripts/landing.js' %}" defer></script>
+
+  <title>Join the Collective</title>
+</head>
+
+<body>
+  {% if user.is_authenticated %}
+
+  <a class="landing" href="{% url 'home' %}">Join the Collective</a>
+
+  {% else %}
+
+  <div class="landing">Join the Collective</div>
+
+  {% comment %} MODALS {% endcomment %}
+
+  {% comment %} Login
+  <div class="modal" id="loginModal" style="display:none;" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="{% url 'login' %}">
+            {% csrf_token %} {{ login_form.as_p }}
+            <div class="modal-footer">
+              <input type="submit" class="btn login-submit" value="login" />
+              <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} Sign up {% endcomment %}
+  {% comment%}<div class="modal" id="signUpModal" style="display:none;" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sign Up</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="{% url 'signup' %}">
+          {% csrf_token %} {{ signup_form.as_p }}
+          <p>
+          <div class="modal-footer">
+            <button type="submit" class="btn signUp-submit">Create Login</button>
+            <input type="hidden" name="next" value="{{ next }}" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
+
+<!-- MODAL LOGIN -->
+    <div class="sign-in-modal">
+      <div class="inner--sign-in-modal">
+        <div class="val-info">
+          <span class="overlay sign-in-side"></span>
+          <div class="tab tab-sign-in active">
+            Login
+          </div>
+          <div class="tab tab-sign-up">
+            Register
+          </div>
+        </div>
+        <div class="content-info">
+          <div class="content-sign-in">
+            <div class="wrap--content-sign-in">
+              <div class="greetings">
+                Welcome back, be sure to login in order to proceed.
+              </div>
+
+              <form class="" action="index.html" method="post">
+
+                <div class="input-control">
+                  <input type="text" name="" value="" placeholder="Email">
+                </div>
+                <div class="input-control">
+                  <input type="text" name="" value="" placeholder="Password">
+                </div>
+                <button type="submit" name="button"> Login </button>
+              </form>
+
+              <!-- <div class="close-login">
+                Sair <span>[</span><span>x</span><span>]</span>
+              </div> -->
+
+            </div>
+          </div>
+          <div class="content-sign-up">
+            <div class="wrap--content-sign-up">
+              <div class="greetings">
+                Welcome Mr(s) <span class="greetings-name"></span> <span class="greetings-surname"></span>
+              </div>
+
+              <form class="" action="index.html" method="post">
+                <div class="input-control">
+                  <input type="text" name="" value="" class="input-firstname" placeholder="First Name">
+                </div>
+                <div class="input-control">
+                  <input type="text" name="" value="" class="input-lastname" placeholder="Last Name">
+                </div>
+                <div class="input-control">
+                  <input type="text" name="" value="" placeholder="Email">
+                </div>
+                <div class="input-control">
+                  <input type="text" name="" value="" placeholder="Password">
+                </div>
+                <button type="submit" name="button"> Register </button>
+              </form>
+
+              <!-- <div class="close-login">
+                Sair <span>[</span><span>x</span><span>]</span>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL LOGIN -->
+
+{% endif %}
+
+</body>
+</html>
