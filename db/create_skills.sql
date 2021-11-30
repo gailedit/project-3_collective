@@ -24,7 +24,4 @@ INSERT INTO main_app_skill(name)
   VALUES ('Knitting');
 
 INSERT INTO main_app_skill(name)
-  VALUES ('Drawing');
-
-INSERT INTO main_app_skill(name)
   VALUES ('CAD');

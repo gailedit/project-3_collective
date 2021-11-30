@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} New Project {% endblock %}
+</head>
+<body>
+
+{% block content %}
+  <h1>This is our New Project page!</h1>
+  <form method="post">
+<!-- Security Feature  -->
+  {% csrf_token %} 
+<!--  Generate inputs  -->
+  {{form.as_p}} 
+<!--  Submit form  -->
+  <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}
+</body>
+</html>

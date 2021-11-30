@@ -1,8 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 
+{% block title %} Log In {% endblock %}
+</head>
 <body>
   <section class="contain-form">
-    <h1 class="title">Log In</h1>
+    <h1 class="title">Log In TEST</h1>
     <form method="post" action="{% url 'login' %}">
       {% csrf_token %} {{ form.as_p }}
       <div class="login-submit-btn">

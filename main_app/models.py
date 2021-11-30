@@ -29,9 +29,12 @@ class Profile(Model):
 class Project(Model):
   title = CharField(max_length=200)
   img = CharField(max_length=400)
-  description = CharField(max_length=5000)
+  collaborators = CharField(max_length=600, default='None yet!')
   location = CharField(max_length=50) # Add default to project owner's location
-
+  about = CharField(max_length=5000)
+  skills_needed = CharField(max_length=1000, default=Skill)
+  skills_teachable = CharField(max_length=1000, default=Skill)
+  project_owner = CharField(max_length=300, default=User)
 
 
 

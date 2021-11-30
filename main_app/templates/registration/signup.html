@@ -1,5 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 
+
+{% block title %} Sign Up {% endblock %}
+</head>
 <body>
   <section class="contain-form">
     <h1 class="title">Sign Up</h1>
@@ -8,7 +11,7 @@
       <div class="signup-submit-btn">
         <button type="submit" class="btn signup-submit">Sign Up</button>
         <input type="hidden" name="next" value="{{ next }}" />
-        <a href={{"/login"}}>Already have an account?</a>
+        <a href={{"/accounts/login"}}>Already have an account?</a>
       </div>
     </form>
   </section>

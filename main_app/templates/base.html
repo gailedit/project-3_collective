@@ -80,7 +80,11 @@
     </a>
     <div class="navbar-links">
       <ul class="nav-container">
-        <li><a href="{% url 'login' %}" class="nav-item">Log In</a></li>
+        <a  id="login-btn" type="button" class="nav-button" >Login</a>
+        <a id="signup-btn" type="button" class="nav-button" >Sign Up</a>
+
+        {% comment %} <li><a href="{% url 'login' %}" class="nav-item">Log In</a></li>
+        <li><a href="{% url 'signup' %}" class="nav-item">Sign Up</a></li> {% endcomment %}
       </ul>
     </div>
   </nav>
@@ -94,6 +98,52 @@
   </main>
 
   <footer>This is the footer</footer>
+
+  {% comment %} MODALS {% endcomment %}
+
+  {% comment %} Login {% endcomment %}
+  <div class="modal" id="loginModal" style="display:none;" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="{% url 'login' %}">
+            {% csrf_token %} {{ login_form.as_p }}
+            <div class="modal-footer">
+              <input type="submit" class="btn login-submit" value="login" />
+              <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} Sign up {% endcomment %}
+  <div class="modal" id="signUpModal" style="display:none;" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sign Up</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="{% url 'signup' %}">
+          {% csrf_token %} {{ signup_form.as_p }}
+          <p>
+          <div class="modal-footer">
+            <button type="submit" class="btn signUp-submit">Create Login</button>
+            <input type="hidden" name="next" value="{{ next }}" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 </body>
 </html>
