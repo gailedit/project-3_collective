@@ -5,7 +5,7 @@
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
-  font: inherit;
+  font-family: Arial, Helvetica, sans-serif;
   vertical-align: baseline;
   list-style: none;
 }
@@ -27,7 +27,8 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: green;
+  height: 4rem;
+  background-color: black;
   color: white;
 }
 
@@ -40,7 +41,12 @@ body {
 
 .navbar .nav-start .logo {
   font-size: 1.5rem;
-  margin: .5rem;
+  padding: .5rem;
+}
+
+.navbar .nav-start .logo a {
+  color: white;
+  text-decoration: none;
 }
 
 .navbar .navbar-links ul {
@@ -49,9 +55,10 @@ body {
   display: -ms-flexbox;
   display: flex;
   list-style: none;
+  padding: 0;
 }
 
-.navbar .navbar-links li a {
+.navbar .navbar-links a {
   text-decoration: none;
   color: white;
   padding: 1rem;

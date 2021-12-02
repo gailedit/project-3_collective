@@ -1,11 +1,41 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<div class="detail__img">
+  <img src="{{project.img}}" alt="Image of {{project}}" />
+</div>
 
-{% block title %} Project {% endblock %}
-</head>
-<body>
+  <h1 class="title">{{project}}</h1>
+</div>
+<div class="detail__container">
+  <div class="buttons">
+    <a href="{% url "project_update" project.pk %}" class="button btn-update">
+      <span class="icon">
+        <i class="fas fa-edit"></i>
+      </span>
+    </a>
+    <a href="{% url 'project_delete' project.pk %}" class="button btn-delete">
+      <span class="icon">
+        <i class="fas fa-trash-alt"></i>
+      </span>
+    </a>
+    {% comment %} <a href="{% url 'project_create' user.pk %}" class="button btn-create">
+      <span class="icon">
+        <i class="far fa-plus-square"></i>
+      </span> {% endcomment %}
+    </a>
+  </div>
+  <div class="detail__about">
+    <h4 class="title is-4">About</h4>
+    <p>{{project.about}}</p>
+    <p>{{project.location}}</p>
+  </div>
+  <div class="skills_needed">
+    <p>{{project.skills_needed}}</p>
+  </div>
+  <div class="skills_teachable">
+    <p>{{profile.skills_teachable}}</p>
+  </div>
+</div>
 
-{% block content %}
-  <h1>This is our Project page!</h1>
 {% endblock %}
-</body>
-</html>
+
+

@@ -101,29 +101,18 @@ class ProfileDetail(DetailView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    # context = ["projects"] = Project.objects.filter(title=self.object.pk)
-    form = ProfileUpdateForm(instance=self.object)
-    form = ProjectCreateForm()
-    context["form"] = form
     return context
-
-class ProfileUpdateForm(ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['location', 'image', 'about', 'skills_current', 'skills_learn']
 
 # Profile Update
 @method_decorator(login_required, name='dispatch')
-class ProfileUpdate(View):
+class ProfileUpdate(UpdateView):
+  model = Profile
+  fields = ['location', 'image', 'about', 'skills_current', 'skills_learn']
+  template_name = "profile_update.html"
 
-  def post(self, request, pk):
-    form = ProfileUpdateForm(request.POST)
-    if form.is_valid():
-      Profile.objects.filter(user=pk).update(location=request.POST.get('location'), image=request.POST.get('image'), about=request.POST.get('about'), skills_current=request.POST.get('skills_current'), skills_learn=request.POST.get('skills_learn'))
-      return redirect("profile", pk=pk)
-    else:
-      context = {"form": form, "pk": pk}
-      return render(request, "profile_detail.html", context)
+  def get_success_url(self):
+      return reverse('profile_detail', kwargs={'pk': self.object.pk})
+
 
 # Profile Delete
 @method_decorator(login_required, name='dispatch')
@@ -140,30 +129,29 @@ class ProfileRedirect(View):
 # # === SECTION Project Views ===
 
 # Project Create
+@method_decorator(login_required, name='dispatch')
+class ProjectCreate(CreateView):
+  model = Project
+  fields = ['title', 'img', 'collaborators', 'location', 'about', 'skills_needed', 'skills_teachable', 'project_owner']
+  template_name = "project_create.html"
+  success_url = "/project/"
 
-class ProjectCreateForm(ModelForm):
-  class Meta:
-    model = Project
-    fields = ['title', 'img', 'collaborators', 'location', 'about', 'skills_needed', 'skills_teachable', 'project_owner']
+  def get_success_url(self):
+    return reverse('project', kwargs={'pk': self.object.pk})
 
-class ProjectCreate(View):
-  def post(self, request, pk):
-    title = request.POST.get("title")
-    location = request.POST.get("location")
-    about = request.POST.get("about")
-    collaborators = request.POST.get("collaborators")
-    project_owner = request.POST.get("project_owner")
-    skills_needed = request.POST.get("skills_needed")
-    skills_teachable = request.POST.get("skills_teachable")
-
-    Project.objects.create(title=title, location=location, about=about, collaborators=collaborators, project_owner=project_owner, skills_needed=skills_needed, skills_teachable=skills_teachable)
-    return redirect()
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super(ProjectCreate, self).form_valid(form)
 
 
 # Project Read
 class ProjectDetail(DetailView):
   model = Project
   template_name = "project_detail.html"
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    return context
   
 class ProjectList(TemplateView):
   template_name = "project_list.html"
@@ -173,9 +161,14 @@ class ProjectList(TemplateView):
     context["projects"] = Project.objects.all()
     return context
 
-# # Project Update
-# class ProjectUpdate(TemplateView):
-#   template_name = "update_project.html"
+# Project Update
+class ProjectUpdate(UpdateView):
+  model = Project
+  fields = ['title', 'img', 'collaborators', 'location', 'about', 'skills_needed', 'skills_teachable']
+  template_name = "project_update.html"
+
+  def get_success_url(self):
+      return reverse('project', kwargs={'pk': self.object.pk})
 
 # Project Delete
 class ProjectDelete(DeleteView):
@@ -191,6 +184,8 @@ class ProjectDelete(DeleteView):
 #     context["skills"] = Skill.objects.all()
 #     return context
 
+
+# === SECTION About Pages ===
 class About(TemplateView):
   template_name = "about.html"
 
