@@ -51,7 +51,8 @@ class Home(TemplateView):
 
   def get_context_data(self, **kwargs):
       context = super().get_context_data(**kwargs)
-      # context["projects"] = Project.objects.all()
+      context["projects"] = Project.objects.all()
+      context["profiles"] = Profile.objects.all()
       return context
 
 
@@ -111,7 +112,7 @@ class ProfileUpdate(UpdateView):
   template_name = "profile_update.html"
 
   def get_success_url(self):
-      return reverse('profile_detail', kwargs={'pk': self.object.pk})
+      return reverse('profile', kwargs={'pk': self.object.pk})
 
 
 # Profile Delete
@@ -132,7 +133,7 @@ class ProfileRedirect(View):
 @method_decorator(login_required, name='dispatch')
 class ProjectCreate(CreateView):
   model = Project
-  fields = ['title', 'img', 'collaborators', 'location', 'about', 'skills_needed', 'skills_teachable', 'project_owner']
+  fields = ['title', 'img', 'collaborators', 'location', 'about', 'skills_needed', 'skills_teachable']
   template_name = "project_create.html"
   success_url = "/project/"
 
@@ -140,9 +141,8 @@ class ProjectCreate(CreateView):
     return reverse('project', kwargs={'pk': self.object.pk})
 
   def form_valid(self, form):
-    form.instance.user = self.request.user
+    form.instance.project_owner = self.request.user
     return super(ProjectCreate, self).form_valid(form)
-
 
 # Project Read
 class ProjectDetail(DetailView):
@@ -153,13 +153,6 @@ class ProjectDetail(DetailView):
     context = super().get_context_data(**kwargs)
     return context
   
-class ProjectList(TemplateView):
-  template_name = "project_list.html"
-
-  def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    context["projects"] = Project.objects.all()
-    return context
 
 # Project Update
 class ProjectUpdate(UpdateView):
@@ -175,14 +168,6 @@ class ProjectDelete(DeleteView):
   model = Project
   template_name = "project_delete_confirmation.html"
   success_url = "profile"
-
-# class SkillList(TemplateView):
-#   template_name = "skill_list.html"
-
-#   def get_context_data(self, **kwargs):
-#     context = super().get_context_data(**kwargs)
-#     context["skills"] = Skill.objects.all()
-#     return context
 
 
 # === SECTION About Pages ===

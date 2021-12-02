@@ -17,22 +17,32 @@
         <i class="fas fa-trash-alt"></i>
       </span>
     </a>
-    {% comment %} <a href="{% url 'project_create' user.pk %}" class="button btn-create">
-      <span class="icon">
-        <i class="far fa-plus-square"></i>
-      </span> {% endcomment %}
+
     </a>
   </div>
   <div class="detail__about">
-    <h4 class="title is-4">About</h4>
+
+    <h3>Project Owner: </h3><p>{{project.project_owner}}</p>
+    <h3>Other contributors: </h3>
+    {% for profile in project.collaborators.all %}
+    <p>{{profile.user}}</p>
+    <h3 class="title is-4">About</h3>
     <p>{{project.about}}</p>
     <p>{{project.location}}</p>
+    {% endfor %}
   </div>
   <div class="skills_needed">
-    <p>{{project.skills_needed}}</p>
+  <h3>Skills Needed for this Project</h3>
+    {% for skill in project.skills_needed.all %}
+    <p>{{skill.name}}</p>
+    {% endfor %}
   </div>
+
   <div class="skills_teachable">
-    <p>{{profile.skills_teachable}}</p>
+  <h3>Skills to Learn on this Project</h3>
+    {% for skill in project.skills_teachable.all %}
+    <p>{{skill.name}}</p>
+    {% endfor %}
   </div>
 </div>
 

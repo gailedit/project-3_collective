@@ -6,6 +6,60 @@
 
 {% block content %}
   <h1>This is our Home page!</h1>
+  <div class="gallery">
+    <div class="projects_list">
+      <h3>Active Projects</h3>
+      {% for project in projects %}
+        <a href="{% url 'project' project.pk %}">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-square">
+                <img src="{{project.img}}" alt="{{project.title}}" />
+              </figure>
+            </div>
+            <div class="card-header">
+              <p class="card-header-title">{{project.title}}</p>
+            </div>
+          </div>
+        </a>
+
+        {% empty %}
+        <article class="message">
+          <div class="message-header">
+            <p>No Projects Available</p>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <div class="creator_list">
+      <h3>Your Fellow Creators</h3>
+        {% for profile in profiles %}
+          <a href="{% url 'profile' profile.pk %}">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-square">
+                  <img src="{{profile.image}}" alt="image of {{profile.user}}" />
+                </figure>
+              </div>
+              <div class="card-header">
+                <p class="card-header-title">{{profile.user}}</p>
+              </div>
+            </div>
+          </a>
+
+        {% empty %}
+        <article class="message">
+          <div class="message-header">
+            <p>No Projects Available</p>
+          </div>
+        </article>
+
+      {% endfor %}
+
+    </div>
+  </div>
+
   
 {% endblock %}
 </body>

@@ -28,14 +28,50 @@
     <p>{{profile.about}}</p>
     <p>{{profile.location}}</p>
   </div>
+
   <div class="skills_current">
-    <p>{{profile.skills_current}}</p>
+  <h1>Current Skills</h1>
+    {% for skill in profile.skills_current.all %}
+    <p>{{skill.name}}</p>
+    {% endfor %}
   </div>
-  <div class="skills_current">
-    <p>{{profile.skills_current}}</p>
+
+  <div class="skills_learn">
+  <h1>Skills I Want to Learn</h1>
+    {% for skill in profile.skills_learn.all %}
+    <p>{{skill.name}}</p>
+    {% endfor %}
   </div>
+
+
+  <div class="user_projects">
+    <h3>My Projects</h3>
+      {% for project in user.projects.all %}
+        <a href="{% url 'project' project.pk %}">
+          <p>{{project.title}}</p>
+          <img src="{{project.img}}" alt="Image of {{project.title}}" />
+          <p>{{project.location}}</p>
+        </a>
+
+        {% empty %}
+        <article class="message">
+          <div class="message-header">
+            <p>No Projects Available</p>
+          </div>
+        </article>
+
+      {% endfor %}
+    </div>
+
+    <div class="projects">
+    <h3>Collaborative Projects</h3>
+      {% for project in user.projects_collab.all %}
+        <p>{{project.title}}</p>
+        <a href="{{project.img}}"> </a>
+        <p>{{project.project_owner}}</p>
+      {% endfor %}
+  </div>
+
 </div>
 
-{% endblock %}
-
-
+{% endblock content %}

@@ -18,7 +18,6 @@ class Skill(Model):
     ordering = ['name']
 
 
-
 class Profile(Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
   location = models.CharField(max_length=100)
@@ -30,9 +29,6 @@ class Profile(Model):
   def __str__(self) -> str:
     return self.user.username
 
-
-
-
 class Project(Model):
   title = CharField(max_length=200)
   img = CharField(max_length=400)
@@ -41,7 +37,7 @@ class Project(Model):
   about = CharField(max_length=5000)
   skills_needed = ManyToManyField(Skill, related_name="projects_required")
   skills_teachable = ManyToManyField(Skill, related_name="projects_teach")
-  project_owner = ForeignKey(User, on_delete=models.CASCADE)
+  project_owner = ForeignKey(User, on_delete=models.CASCADE, related_name="projects")
 
   def __str__(self) -> str:
     return self.title
