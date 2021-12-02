@@ -7,14 +7,19 @@
 </div>
 <div class="detail__container">
   <div class="buttons">
-    <a href="{% url "profile_update" profile.pk %}" class="button is-info">
+    <a href="{% url "profile_update" profile.pk %}" class="button btn-update">
       <span class="icon">
         <i class="fas fa-edit"></i>
       </span>
     </a>
-    <a href="{% url 'profile_delete' user.pk %}" class="button is-danger">
+    <a href="{% url 'profile_delete' user.pk %}" class="button btn-delete">
       <span class="icon">
         <i class="fas fa-trash-alt"></i>
+      </span>
+    </a>
+    <a href="{% url 'project_create' user.pk %}" class="button btn-create">
+      <span class="icon">
+        <i class="far fa-plus-square"></i>
       </span>
     </a>
   </div>

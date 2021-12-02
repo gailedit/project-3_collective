@@ -101,7 +101,9 @@ class ProfileDetail(DetailView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
+    # context = ["projects"] = Project.objects.filter(title=self.object.pk)
     form = ProfileUpdateForm(instance=self.object)
+    form = ProjectCreateForm()
     context["form"] = form
     return context
 
@@ -123,8 +125,6 @@ class ProfileUpdate(View):
       context = {"form": form, "pk": pk}
       return render(request, "profile_detail.html", context)
 
-
-
 # Profile Delete
 @method_decorator(login_required, name='dispatch')
 class ProfileDelete(DeleteView):
@@ -140,16 +140,30 @@ class ProfileRedirect(View):
 # # === SECTION Project Views ===
 
 # Project Create
-class ProjectCreate(CreateView):
-  model = Project
-  fields = ['title', 'img', 'collaborators', 'location', 'about', 'skills_needed', 'skills_teachable', 'project_owner']
-  template_name = "project_create.html"
-  success_url = "/project/"
+
+class ProjectCreateForm(ModelForm):
+  class Meta:
+    model = Project
+    fields = ['title', 'img', 'collaborators', 'location', 'about', 'skills_needed', 'skills_teachable', 'project_owner']
+
+class ProjectCreate(View):
+  def post(self, request, pk):
+    title = request.POST.get("title")
+    location = request.POST.get("location")
+    about = request.POST.get("about")
+    collaborators = request.POST.get("collaborators")
+    project_owner = request.POST.get("project_owner")
+    skills_needed = request.POST.get("skills_needed")
+    skills_teachable = request.POST.get("skills_teachable")
+
+    Project.objects.create(title=title, location=location, about=about, collaborators=collaborators, project_owner=project_owner, skills_needed=skills_needed, skills_teachable=skills_teachable)
+    return redirect()
+
 
 # Project Read
-
-class Project(TemplateView):
-  template_name = "project.html"
+class ProjectDetail(DetailView):
+  model = Project
+  template_name = "project_detail.html"
   
 class ProjectList(TemplateView):
   template_name = "project_list.html"
@@ -160,11 +174,14 @@ class ProjectList(TemplateView):
     return context
 
 # # Project Update
-# class Update_Project(TemplateView):
+# class ProjectUpdate(TemplateView):
 #   template_name = "update_project.html"
 
-# # Project Delete
-# # class Delete_Project()
+# Project Delete
+class ProjectDelete(DeleteView):
+  model = Project
+  template_name = "project_delete_confirmation.html"
+  success_url = "profile"
 
 # class SkillList(TemplateView):
 #   template_name = "skill_list.html"

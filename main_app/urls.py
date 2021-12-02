@@ -5,7 +5,6 @@ urlpatterns = [
   path('', views.Landing.as_view(), name="landing"),
   path('home/', views.Home.as_view(), name="home"),
 
-  # path('accounts/login/', views.Login.as_view(), name="login"),
   path('accounts/signup/', views.Signup.as_view(), name="signup"),
 
   path('profile/<int:pk>/', views.ProfileDetail.as_view(), name="profile"),
@@ -14,9 +13,10 @@ urlpatterns = [
   path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(), name="profile_update"),
   path('profile/<int:pk>/delete/', views.ProfileDelete.as_view(), name="profile_delete"),
 
-  path('project/new/', views.ProjectCreate.as_view(), name="project_create"),
-  path('project/', views.Project.as_view(), name="project"),
-  # path('project/update/', views.Update_Project.as_view(), name="project_update"),
+  path('profile/<int:pk>/projects/new/', views.ProjectCreate.as_view(), name="project_create"),
+  path('projects/<int:pk>/', views.ProjectDetail.as_view(), name="project"),
+  # path('projects/<int:pk>/update/', views.ProjectUpdate.as_view(), name="project_update"),
+  path('projects/<int:pk>/delete/', views.ProjectDelete.as_view(), name="project_delete"),
   # path('projects/', views.ProjectList.as_view(), name="project_list"),
 
   path('about/', views.About.as_view(), name="about"),
