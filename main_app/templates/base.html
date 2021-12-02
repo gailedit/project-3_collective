@@ -52,7 +52,7 @@
     </a>
     <div class="navbar-links">
       <ul class="nav-container">
-        <span class="navbar-item">Welcome: {{user.username}}</span>
+        <a href="{% url 'profile' user.pk %}" class="navbar-item">Welcome: {{user.username}}</a>
         <li><a href="{% url 'logout' %}" class="nav-item">Logout</a></li>
       </ul>
     </div>

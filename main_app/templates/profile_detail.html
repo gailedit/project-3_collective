@@ -1,18 +1,18 @@
 {% extends 'base.html' %} {% block content %}
 <div class="detail__img">
-  <img src="{{Profile.img}}" alt="{{user}}'s profile photo" />
+  <img src="{{profile.image}}" alt="{{user}}'s profile photo" />
 </div>
 
   <h1 class="title">{{user}}</h1>
 </div>
 <div class="detail__container">
   <div class="buttons">
-    <a href="" class="button is-info">
+    <a href="{% url "profile_update" profile.pk %}" class="button is-info">
       <span class="icon">
         <i class="fas fa-edit"></i>
       </span>
     </a>
-    <a href="" class="button is-danger">
+    <a href="{% url 'profile_delete' user.pk %}" class="button is-danger">
       <span class="icon">
         <i class="fas fa-trash-alt"></i>
       </span>
@@ -22,6 +22,12 @@
     <h4 class="title is-4">About</h4>
     <p>{{profile.about}}</p>
     <p>{{profile.location}}</p>
+  </div>
+  <div class="skills_current">
+    <p>{{profile.skills_current}}</p>
+  </div>
+  <div class="skills_current">
+    <p>{{profile.skills_current}}</p>
   </div>
 </div>
 

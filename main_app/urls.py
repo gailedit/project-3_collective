@@ -8,9 +8,11 @@ urlpatterns = [
   # path('accounts/login/', views.Login.as_view(), name="login"),
   path('accounts/signup/', views.Signup.as_view(), name="signup"),
 
-  path('profile/<int:pk>', views.Profile.as_view(), name="profile"),
-  path('profile/update/', views.Update_Profile.as_view(), name="profile_update"),
-  path('profile/create/', views.Create_Profile.as_view(), name="profile_create"),
+  path('profile/<int:pk>/', views.ProfileDetail.as_view(), name="profile"),
+  path('profile_redirect/', views.ProfileRedirect.as_view(), name="profile_redirect"),
+  path('profile/create/', views.ProfileCreate.as_view(), name="profile_create"),
+  path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(), name="profile_update"),
+  path('profile/<int:pk>/delete/', views.ProfileDelete.as_view(), name="profile_delete"),
 
   path('project/new/', views.ProjectCreate.as_view(), name="project_create"),
   path('project/', views.Project.as_view(), name="project"),
