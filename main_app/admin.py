@@ -8,3 +8,4 @@ from . import models
 
 admin.site.register(Skill)
 admin.site.register(Project)
+admin.site.register(Profile)

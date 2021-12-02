@@ -1,19 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 
-{% block title %} Log In {% endblock %}
-</head>
-<body>
-  <section class="contain-form">
-    <h1 class="title">Log In TEST</h1>
-    <form method="post" action="{% url 'login' %}">
-      {% csrf_token %} {{ form.as_p }}
-      <div class="login-submit-btn">
-        <button type="submit" class="btn login-submit">Login</button>
-        <input type="hidden" name="next" value="{{ next }}" />
-        <a href={{"/signup"}}>Need an account?</a>
-      </div>
-    </form>
-  </section>
-</body>
+<h1 class="title">Log In</h1>
+<form method="post" action="{% url 'login' %}">
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" class="btn" value="login" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</form>
 
 {% endblock %}

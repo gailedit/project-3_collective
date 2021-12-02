@@ -10,7 +10,6 @@ toggleButton.addEventListener('click', () => {
 /* === Clicking Log In button pops up login modal === */
 
 const loginButton = document.getElementById("login-btn");
-
 loginButton.addEventListener("click", showLoginModal);
 
 function showLoginModal() {

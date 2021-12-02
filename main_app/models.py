@@ -4,7 +4,7 @@ from django.db.models import Model
 from django.db.models.fields import CharField
 
 from django.contrib.auth.models import User
-from django.db.models.fields.related import ForeignKey
+from django.db.models.fields.related import ForeignKey, ManyToManyField
 
 # Create your models here.
 
@@ -23,38 +23,27 @@ class Profile(Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
   location = models.CharField(max_length=100)
   image = models.CharField(max_length=400, default="https://static.thenounproject.com/png/4214241-200.png")
+  about = models.CharField(max_length=3000)
+  skills_current = ManyToManyField(Skill, related_name="users_have")
+  skills_learn = ManyToManyField(Skill, related_name="users_learn")
+
+  def __str__(self) -> str:
+    return self.user.username
+
 
 
 
 class Project(Model):
   title = CharField(max_length=200)
   img = CharField(max_length=400)
-  collaborators = CharField(max_length=600, default='None yet!')
+  collaborators = ManyToManyField(User, related_name="projects_collab")
   location = CharField(max_length=50) # Add default to project owner's location
   about = CharField(max_length=5000)
-  skills_needed = CharField(max_length=1000, default=Skill)
-  skills_teachable = CharField(max_length=1000, default=Skill)
-  project_owner = CharField(max_length=300, default=User)
+  skills_needed = ManyToManyField(Skill, related_name="projects_required")
+  skills_teachable = ManyToManyField(Skill, related_name="projects_teach")
+  project_owner = ForeignKey(User, on_delete=models.CASCADE)
+
+  def __str__(self) -> str:
+    return self.title
 
 
-
-
-
-
-
-
-
-
-
-
-
-# skills = [
-#   Skill("Painting"),
-#   Skill("Drawing"),
-#   Skill("Watercolor"),
-#   Skill("Welding"),
-#   Skill("Project Management"),
-#   Skill("Grant Writing"),
-#   Skill("Woodworking"),
-#   Skill("LED lights"),
-# ]

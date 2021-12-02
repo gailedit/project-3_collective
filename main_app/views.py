@@ -1,8 +1,22 @@
 from django.shortcuts import render, redirect
+
+# import basic views
 from django.views import View
+
+
+from django.forms import ModelForm
+
+# import httpresponse
 from django.http import HttpResponse
+
+# import views for templates
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
+
+#import detail view
+from django.views.generic.detail import DetailView
+
+# import for create, read, update, and delete
+from django.views.generic.edit import CreateView, FormView, UpdateView, DeleteView
 
 # Authentication imports
 from django.contrib.auth import login
@@ -13,11 +27,12 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 # import models
-from .models import Skill, Project
+from .models import Skill, Project, Profile
 
 
 # Create your views here.
 
+# === SECTION Landing Page: auth & no auth ===
 class Landing(TemplateView):
   template_name = "landing.html"
 
@@ -27,19 +42,44 @@ class Landing(TemplateView):
     context["login_form"] = AuthenticationForm()
     return context
 
+
+# === SECTION Home Page: auth only ===
 class Home(TemplateView):
   template_name = "home.html"
 
   def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    context["signup_form"] = UserCreationForm()
-    context["login_form"] = AuthenticationForm()
-    return context
-  
-class Login(TemplateView):
-  template_name = "registration/login.html"
+      context = super().get_context_data(**kwargs)
+      # context["projects"] = Project.objects.all()
+      return context
 
+
+# === SECTION Login Page (might delete) ===
+""" class Login(TemplateView):
+  def get(self, request):
+    form = AuthenticationForm()
+    context = {"form": form}
+    return render(request, "registration/login.html", context)
+
+  def post(self, request):
+    
+      form = AuthenticationForm(request.POST)
+      if form.is_valid():
+          user = form.save()
+          return redirect("home_redirect")
+      else:
+          context = {"form": form}
+          return render(request, "registration/login.html", context)
+    
+@method_decorator(login_required, name='dispatch')
+class HomeRedirect(View):
+  def get(self, request):
+    return redirect('/home/') """
+
+
+
+# === SECTION Signup Page (might delete) ===
 class Signup(TemplateView):
+
   def get(self, request):
     form = UserCreationForm()
     context = {"form": form}
@@ -49,13 +89,26 @@ class Signup(TemplateView):
     form = UserCreationForm(request.POST)
     if form.is_valid():
       user = form.save()
+      # Profile.objects.create(location=request.POST.get('location'), user=user)
       login(request, user)
-      return redirect("update-profile")
+      return redirect("profile_update")
     else:
       context = {"form": form}
       return render(request, "registration/signup.html", context)
 
-class Profile(TemplateView):
+
+# # === SECTION Profile Views ===
+
+# Profile Create
+class Create_Profile(CreateView): #CreateView
+  model = Profile
+  fields = ['id', 'location', 'image', 'user_id']
+  template_name = "profile_create.html"
+  success_url = "/profile/"
+
+# Profile Read
+class Profile(DetailView):
+  model = Profile
   template_name = "profile.html"
 
   def get_context_data(self, **kwargs): 
@@ -64,44 +117,62 @@ class Profile(TemplateView):
     if name != None:
       context[""]
 
+# Profile Update
 class Update_Profile(TemplateView):
   template_name = "update_profile.html"
+# class Update_Profile(ModelForm):
 
+
+# @method_decorator(login_required, name='dispatch')
+# class UserProfile(DetailView):
+#   model= Profile
+#   template_name="profile.html"
+
+#   def get_context_data(self, **kwargs):
+#     context = super().get_context_data(**kwargs)
+#     context["projects"] = Project.objects.filter(user=self.object.pk)
+#     form = Update_Profile(instance=self.object)
+#     context["form"] = form
+#     return context
+
+
+
+# # === SECTION Project Views ===
+
+# Project Create
 class ProjectCreate(CreateView):
   model = Project
   fields = ['title', 'img', 'collaborators', 'location', 'about', 'skills_needed', 'skills_teachable', 'project_owner']
   template_name = "project_create.html"
   success_url = "/project/"
 
-class Project:
-  def __init__(self, title, image, location, about):
-    self.title = title
-    self.image = image
-    self.location = location
-    self.about = about
+# Project Read
 
-projects = [
-  Project("Super Cool Art Project", "https://www.google.com/url?sa=i&url=https%3A%2F%2Fu.osu.edu%2Fhill.1523%2F2015%2F10%2F19%2Fexhibition-proposal-draft%2F&psig=AOvVaw2GCcCAueSo7Fukd4vfJiB8&ust=1638402389939000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKi7iNeiwfQCFQAAAAAdAAAAABAD", "Petaluma", "My piece takes the shape of a tree using panels of wood arranged in a semi-circular setup around a tree stump. There will be an opening in which the viewer can sit on the stump inside of the panels. I would like my piece to be placed in a corner in which the viewer can walk around the piece as well as sit inside of it. The piece is made up almost entirely of wood and will have a sound element. The stump will be elevated using pieces of wood and the sound will be placed beneath the stump. I would like to run the wires from the speaker up one of the back planks into the ceiling. I will provide the speaker but will need someway to play the sound. The piece is about 8 feet tall and 4 feet in all directions. I will also need to use your track lighting system."),
-  Project("Untitled", "https://cdna.artstation.com/p/assets/images/images/018/966/814/large/maria-benita-a-img-20161027-wa0005.jpg?1561450038", "Reno, NV", "It's a time travel machine. I know it sounds crazy, but I've gotten it to work once before - I just need someone who knows arduino to really make this a viable product"),
-]
-
+class Project(TemplateView):
+  template_name = "project.html"
+  
 class ProjectList(TemplateView):
   template_name = "project_list.html"
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    context["projects"] = projects
-
-class Update_Project(TemplateView):
-  template_name = "update_project.html"
-
-class SkillList(TemplateView):
-  template_name = "skill_list.html"
-
-  def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    context["skills"] = Skill.objects.all()
+    context["projects"] = Project.objects.all()
     return context
+
+# # Project Update
+# class Update_Project(TemplateView):
+#   template_name = "update_project.html"
+
+# # Project Delete
+# # class Delete_Project()
+
+# class SkillList(TemplateView):
+#   template_name = "skill_list.html"
+
+#   def get_context_data(self, **kwargs):
+#     context = super().get_context_data(**kwargs)
+#     context["skills"] = Skill.objects.all()
+#     return context
 
 class About(TemplateView):
   template_name = "about.html"

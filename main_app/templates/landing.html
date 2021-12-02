@@ -29,7 +29,7 @@
 
   {% else %}
 
-  <div class="landing">Join the Collective</div>
+  <a class="landing" href="{% url 'login' %}">Join the Collective</a>
 
   {% comment %} MODALS {% endcomment %}
 
@@ -76,8 +76,8 @@
   </div>
 </div> {% endcomment %}
 
-<!-- MODAL LOGIN -->
-    <div class="sign-in-modal">
+<!-- FANCY MODAL LOGIN -->
+{% comment %}     <div class="sign-in-modal">
       <div class="inner--sign-in-modal">
         <div class="val-info">
           <span class="overlay sign-in-side"></span>
@@ -143,7 +143,7 @@
       </div>
     </div>
     <!-- MODAL LOGIN -->
-
+ {% endcomment %}
 {% endif %}
 
 </body>

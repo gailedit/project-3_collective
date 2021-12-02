@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Project List{% endblock title %}
+
+{% block content %}
+
+<h1 class="title">Active Projects</h1>
+<div class="gallery">
+  {% for project in projects %}
+  <a href="">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-square">
+          <img src="{{project.image}}" alt="{{project.title}}" />
+        </figure>
+      </div>
+      <div class="card-header">
+        <p class="card-header-title">{{project.title}}</p>
+      </div>
+    </div>
+  </a>
+	{% empty %}
+  <article class="message">
+    <div class="message-header">
+      <p>No Projects Available</p>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+
+{% endblock content %}

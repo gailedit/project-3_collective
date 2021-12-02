@@ -34,7 +34,7 @@
 
   <nav class="navbar">
   <div class="nav-start">
-    <div class="logo"><a href={{"/"}}>Collective</a></div>
+    <div class="logo"><a href={% url 'home' %}>Collective</a></div>
     <div class="dropdown">
       <button class="about-dropbtn">About
         <i class="fa fa-caret-down"></i>
@@ -52,7 +52,7 @@
     </a>
     <div class="navbar-links">
       <ul class="nav-container">
-        <li>Welcome, <a href="{% url 'profile' user.pk %}" class="nav-item">{{user.username}}</a></li>
+        <span class="navbar-item">Welcome: {{user.username}}</span>
         <li><a href="{% url 'logout' %}" class="nav-item">Logout</a></li>
       </ul>
     </div>
