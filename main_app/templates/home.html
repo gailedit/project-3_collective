@@ -1,19 +1,76 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+  <!-- Local Styles -->
+  <link rel="stylesheet" href="{% static 'styles/home.css' %}" />
+{% endblock styles %}
+
+{% block script %}
+  <!-- Local Scripts-->
+  <script src="{% static 'scripts/carousel.js' %}" defer></script>
+{% endblock script %}
+
 
 {% block title %} Home {% endblock %}
 </head>
+
 <body>
+{% block header %}Home{% endblock header %}
 
 {% block content %}
-  <h1>This is our Home page!</h1>
-  <div class="gallery">
-    <div class="projects_list">
-      <h3>Active Projects</h3>
+
+<div class="container-slider">
+  <div class="carousel">
+    <div class="slider">
       {% for project in projects %}
-        <a href="{% url 'project' project.pk %}">
-          <div class="card">
+      <section class="card-container">
+        <div class="card">
+          <div class="img">
+            <img src="{{project.img}}" alt="{{project.title}}" class="carousel-img" />
+          </div>
+          <div class="info">
+            <p>{{project.title}}</p>
+          </div>
+        </div>
+      </section>
+      {% endfor %}
+      
+    </div>
+    <div class="controls">
+      <button class="next">next</button>
+      <button class="prev">prev</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+          {% comment %} <div class="card">
+            <a href="{% url 'project' project.pk %}">
+            <div class="img">
+              <img src="{{project.img}}" alt="{{project.title}}" />
+            </div>
+            <div class="info">
+              <p class="card-header-title">{{project.title}}</p>
+          </div> {% endcomment %}
+        
+
+
+
+
+          {% comment %} <div class="card">
             <div class="card-image">
-              <figure class="image is-square">
+              <figure class="project-pic-square"> 
                 <img src="{{project.img}}" alt="{{project.title}}" />
               </figure>
             </div>
@@ -22,18 +79,21 @@
             </div>
           </div>
         </a>
+      </div>
+      {% endcomment %}
 
-        {% empty %}
-        <article class="message">
-          <div class="message-header">
-            <p>No Projects Available</p>
-          </div>
-        </article>
-      {% endfor %}
+
+
+
+
+
+
+{% comment %} 
     </div>
 
-    <div class="creator_list">
+    <div class="filter_view" id="profile_filter">
       <h3>Your Fellow Creators</h3>
+      <div class="card_list" id="profile_card_list">
         {% for profile in profiles %}
           <a href="{% url 'profile' profile.pk %}">
             <div class="card">
@@ -48,17 +108,10 @@
             </div>
           </a>
 
-        {% empty %}
-        <article class="message">
-          <div class="message-header">
-            <p>No Projects Available</p>
-          </div>
-        </article>
-
       {% endfor %}
 
     </div>
-  </div>
+  </div> {% endcomment %}
 
   
 {% endblock %}

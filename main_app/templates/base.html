@@ -30,16 +30,16 @@
 </head>
 <body>
 
-  {% if user.is_authenticated %}
-
   <nav class="navbar">
   <div class="nav-start">
     <div class="logo"><a href={% url 'home' %}>Collective</a></div>
     <div class="dropdown">
-      <button class="about-dropbtn">About
+      <div class="about-dropdn">
+      <p>About</p>
         <i class="fa fa-caret-down"></i>
-      </button>
+      </div>
       <div class="dropdown-content">
+        {% comment %} <a href="{% url 'project_create' %}">Create New Project</a> {% endcomment %}
         <a href="{% url 'about' %}">About Collective</a>
         <a href="{% url 'about_dev' %}">About Dev</a>
       </div>
@@ -58,92 +58,18 @@
     </div>
   </nav>
 
-  {% else %}
-
-  <nav class="navbar">
-  <div class="nav-start">
-    <div class="logo"><a href={{"/"}}>Collective</a></div>
-    <div class="dropdown">
-      <button class="about-dropbtn">About
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a href="{% url 'about' %}">About Collective</a>
-        <a href="{% url 'about_dev' %}">About Dev</a>
-      </div>
-    </div>
-  </div>
-    <a href="#" class="toggle-button">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </a>
-    <div class="navbar-links">
-      <ul class="nav-container">
-        <a  id="login-btn" type="button" class="nav-button" >Login</a>
-        <a id="signup-btn" type="button" class="nav-button" >Sign Up</a>
-
-        {% comment %} <li><a href="{% url 'login' %}" class="nav-item">Log In</a></li>
-        <li><a href="{% url 'signup' %}" class="nav-item">Sign Up</a></li> {% endcomment %}
-      </ul>
-    </div>
-  </nav>
-
-  {% endif %}
-
   <main>
-  
-    {% block content %}{% endblock %}
+    <h1>{% block header %}{% endblock header %}</h1>
+    
+    {% block content %}
+    
+    {% endblock %}
   
   </main>
 
   <footer>This is the footer</footer>
 
-  {% comment %} MODALS {% endcomment %}
-
-  {% comment %} Login {% endcomment %}
-  <div class="modal" id="loginModal" style="display:none;" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Login</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form method="post" action="{% url 'login' %}">
-            {% csrf_token %} {{ login_form.as_p }}
-            <div class="modal-footer">
-              <input type="submit" class="btn login-submit" value="login" />
-              <input type="hidden" name="next" value="{{ next }}" />
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {% comment %} Sign up {% endcomment %}
-  <div class="modal" id="signUpModal" style="display:none;" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Sign Up</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form method="post" action="{% url 'signup' %}">
-          {% csrf_token %} {{ signup_form.as_p }}
-          <p>
-          <div class="modal-footer">
-            <button type="submit" class="btn signUp-submit">Create Login</button>
-            <input type="hidden" name="next" value="{{ next }}" />
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
+  
 
 </body>
 </html>

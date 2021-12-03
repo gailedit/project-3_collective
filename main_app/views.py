@@ -95,7 +95,7 @@ class ProfileCreate(CreateView): #CreateView
 
 
 # Profile Read
-@method_decorator(login_required, name='dispatch')
+# @method_decorator(login_required, name='dispatch')
 class ProfileDetail(DetailView):
   model = Profile
   template_name = "profile_detail.html"
