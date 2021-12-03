@@ -1,0 +1,58 @@
+.page {
+  display: flex;
+  padding: 20px 50px;
+
+  .left-info {
+    width: 35%;
+    max-width: 320px;
+    margin: 0 25px;
+    padding: 20px;
+
+    #profile-page-card {
+      margin: auto;
+    }
+
+    #project-page-card {
+      margin: auto;
+    }
+  }
+  
+  .right-info {
+    width: 65%;
+    padding: 20px;
+
+    .detail_about p {
+      padding: 15px;
+    }
+
+    .project-container {
+      display: flex;
+      flex-direction: column;
+      padding: 7px;
+    
+      h3 {
+        margin-top: 5px;
+      }
+
+      .my-project-keeper {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin: 5px 0;
+      }
+
+      .collaborator-keeper {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin: 5px 0;
+      }
+
+      .card {
+        margin: 10px 7px;
+      }
+    }
+  }
+}

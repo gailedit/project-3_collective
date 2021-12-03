@@ -2,12 +2,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600&display=swap");
 /* === Color Variables === */
 :root {
-  --activenav: green;
-  --pink: #FF70A6;
-  --mediumorange: #FF9770;
-  --lightorange: #FFD670;
-  --neonyellow: #E9FF70;
-  --lightpink: #f87dac;
+  --navbarfooter: #3D405B;
+  --activenav: #c6a1a3;
+  --skillbtns: #aab7ae;
+  --background: #ebebeb;
+  --iconslinks: #ddcd83;
 }
 
 /* === CSS Reset === */
@@ -24,7 +23,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: whitesmoke;
+  background-color: var(--background);
 }
 
 /* === Base Navbar === */
@@ -39,7 +38,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   height: 4rem;
-  background-color: black;
+  background-color: var(--navbarfooter);
   color: white;
 }
 
@@ -69,6 +68,7 @@ body {
   display: flex;
   list-style: none;
   padding: 0;
+  color: white;
 }
 
 .navbar .navbar-links a {
@@ -178,15 +178,6 @@ body {
     display: none;
     width: 100%;
   }
-  .navbar {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-  }
   .navbar-links ul {
     width: 100%;
     -webkit-box-orient: vertical;
@@ -196,6 +187,15 @@ body {
   }
   .navbar-links li {
     text-align: center;
+  }
+  .navbar {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
   }
   .navbar-links li a {
     padding: .5rem 1rem;
@@ -217,15 +217,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
-.left-info {
-  width: 350px;
-  border: 1px solid green;
-}
-
 .card {
   max-width: 245px;
-  height: 100%;
   border: 1px solid #ccc;
+  background-color: whitesmoke;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   border-radius: 10px;
@@ -264,7 +259,7 @@ h1, h2, h3, h4, h5, h6 {
 .card .info {
   -ms-flex-preferred-size: 40px;
       flex-basis: 40px;
-  background: #333;
+  background: var(--navbarfooter);
   border-radius: 0 0 10px 10px;
   color: #fff;
   -webkit-box-flex: 0;
@@ -284,6 +279,11 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  padding: 7px;
+}
+
+.skill-container h3 {
+  margin-top: 5px;
 }
 
 .skill-container .skill-keeper {
@@ -292,13 +292,31 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  margin: 5px 0;
 }
 
 .skill-container .skill-keeper .skill-card {
   padding: 7px;
   border-radius: 7px;
   margin: 6px;
-  background-color: lightseagreen;
+  background-color: var(--skillbtns);
+}
+
+.buttons {
+  margin: 14px 0;
+}
+
+.buttons .icon {
+  margin: 5px;
+}
+
+.buttons i {
+  text-decoration: none;
+  padding: 7px;
+  margin: 3px 6px;
+  border-radius: 50%;
+  background-color: var(--iconslinks);
+  color: white;
 }
 
 /* === Footer === */
@@ -308,7 +326,7 @@ footer {
   bottom: 0;
   height: 1.75rem;
   width: 100%;
-  background-color: black;
+  background-color: var(--navbarfooter);
   color: white;
   text-align: center;
   padding: 5px;

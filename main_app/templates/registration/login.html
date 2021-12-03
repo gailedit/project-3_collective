@@ -1,10 +1,38 @@
-{% extends 'base.html' %} {% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <!-- Local Styles -->
+  <link rel="stylesheet" href="{% static 'styles/createupdate.css' %}" />
+
+  {% block styles %} {% endblock %}
+
+  <!-- Local Scripts-->
+  <script src="{% static 'scripts/script.js' %}" defer></script>
+
+  {% block script %} {% endblock %}
+
+
+
+
+  <title>Collective - {% block title %}Login{% endblock %}</title>
+</head>
+<body>
+
+{% block content %}
 
 <h1 class="title">Log In</h1>
-<form method="post" action="{% url 'login' %}">
-  {% csrf_token %} {{ form.as_p }}
-  <input type="submit" class="btn" value="login" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</form>
-
+  <container class="contain-form">
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %} {{ form.as_p }}
+      <input id="login-button" type="submit" class="btn" value="Login" />
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+  </container>
 {% endblock %}

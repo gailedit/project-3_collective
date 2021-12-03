@@ -4,12 +4,11 @@
 
 /* === Color Variables === */
 :root {
-  --activenav: green;
-  --pink: #FF70A6;
-  --mediumorange: #FF9770;
-  --lightorange: #FFD670;
-  --neonyellow: #E9FF70;
-  --lightpink: #f87dac;
+  --navbarfooter: #3D405B;
+  --activenav: #c6a1a3;
+  --skillbtns: #aab7ae;
+  --background: #ebebeb;
+  --iconslinks: #ddcd83;
 }
 
 
@@ -19,7 +18,6 @@
           box-sizing: border-box;
   margin: 0px;
   padding: 0px;
-  // border: 1px solid gold;
   font-family: Arial, Helvetica, sans-serif;
   vertical-align: baseline;
   list-style: none;
@@ -28,7 +26,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: whitesmoke;
+  background-color: var(--background);
 }
 
 
@@ -39,7 +37,7 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 4rem;
-  background-color: black;
+  background-color: var(--navbarfooter);
   color: white;
 
 
@@ -55,7 +53,7 @@ body {
         font-size: 2rem;
         font-family: 'Chakra Petch', sans-serif;
         font-weight: 600;
-        color:white;
+        color: white;
         text-decoration: none;
       }
     }
@@ -67,6 +65,7 @@ body {
     display: flex;
     list-style: none;
     padding: 0;
+    color: white;
     }
 
     a {
@@ -167,18 +166,20 @@ body {
   .navbar-links {
     display: none;
     width: 100%;
+
+    ul {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    li {
+      text-align: center;
+    }
   }
 
   .navbar {
     flex-direction: column;
     align-items: flex-start;
-  }
-  .navbar-links ul {
-    width: 100%;
-    flex-direction: column;
-  }
-  .navbar-links li {
-    text-align: center;
   }
 
   .navbar-links li a {
@@ -201,16 +202,13 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
-.left-info {
-  width: 350px;
-  border: 1px solid green;
-}
 
 // Global project & profile pic icon
 .card {
   max-width: 245px;
-  height: 100%;
+
   border: 1px solid #ccc;
+  background-color: whitesmoke;
   box-sizing: border-box;
   border-radius: 10px;
   display: flex;
@@ -233,7 +231,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .info {
     flex-basis: 40px;
-    background: #333;
+    background: var(--navbarfooter);
     border-radius: 0 0 10px 10px;
     color: #fff;
     flex-grow: 0;
@@ -247,20 +245,42 @@ h1, h2, h3, h4, h5, h6 {
 .skill-container {
   display: flex;
   flex-direction: column;
+  padding: 7px;
+
+  h3 {
+    margin-top: 5px;
+  }
 
   .skill-keeper {
     display: flex;
     flex-wrap: wrap;
+    margin: 5px 0;
   
     .skill-card {
       padding:7px;
       border-radius: 7px;
       margin: 6px;
-      background-color: lightseagreen;
+      background-color: var(--skillbtns);
     }
   }
 }
 
+.buttons {
+  margin: 14px 0;
+
+  .icon {
+    margin: 5px;
+  }
+
+  i {
+    text-decoration: none;
+    padding: 7px;
+    margin: 3px 6px;
+    border-radius: 50%;
+    background-color: var(--iconslinks);
+    color: white;
+  }
+}
 
 
 
@@ -274,7 +294,7 @@ footer {
   bottom: 0;
   height: 1.75rem;
   width: 100%;
-  background-color: black;
+  background-color: var(--navbarfooter);
   color: white;
   text-align: center;
   padding: 5px;

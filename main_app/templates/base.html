@@ -30,6 +30,7 @@
 </head>
 <body>
 
+  {% if user.is_authenticated %}
   <nav class="navbar">
   <div class="nav-start">
     <div class="logo"><a href={% url 'home' %}>Collective</a></div>
@@ -58,9 +59,16 @@
     </div>
   </nav>
 
+  {% else %}
+    <div class="navbar-two">
+      <a class="navbar-item" href="{% url 'login' %}">Login</a>
+      <a class="navbar-item" href="{% url 'signup' %}">Signup</a>
+    </div>
+  {% endif %}
+
   <main>
     <h1>{% block header %}{% endblock header %}</h1>
-    
+
     {% block content %}
     
     {% endblock %}

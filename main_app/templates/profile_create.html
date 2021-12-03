@@ -1,5 +1,26 @@
-{% extends 'base.html' %} {% block content %}
-<h1>Create Your Profile</h1>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+  <!-- Local Styles -->
+  <link rel="stylesheet" href="{% static 'styles/createupate.css' %}" />
+{% endblock styles %}
+
+{% block script %}
+  <!-- Local Scripts-->
+
+{% endblock script %}
+
+
+{% block title %} Welcome! {{profile.user}} {% endblock %}
+</head>
+
+<body>
+{% block header %}Profile: {{profile.user}}{% endblock header %}
+
+
+
+{% block content %}
 
 <form method="post">
 <!-- Security Feature -->

@@ -1,4 +1,121 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+  <!-- Local Styles -->
+  <link rel="stylesheet" href="{% static 'styles/detail.css' %}" />
+{% endblock styles %}
+
+{% block script %}
+  <!-- Local Scripts-->
+{% endblock script %}
+
+
+{% block title %} Project: {{project.title}} {% endblock %}
+</head>
+
+<body>
+{% block content %}
+
+  <container class="page">
+    <section class="left-info">
+      <div class="card" id="project-page-card">
+        <div class="img">
+          <img src="{{project.img}}" alt="{{project.title}}" class="square-img" />
+        </div>
+        <div class="info">
+          <p>{{project.location}}</p>
+        </div>
+      </div>
+      <div class="skill-container">
+        <h3>Skills Needed</h3>
+        <div class="skills_current skill-keeper">
+          {% for skill in project.skills_needed.all %}
+          <div class="skill-card">{{skill.name}}</div>
+          {% endfor %}
+        </div>
+
+        <h3>Skills You Can Learn</h3>
+        <div class="skills_learn skill-keeper">
+          {% for skill in project.skills_teachable.all %}
+          <div class="skill-card">{{skill.name}}</div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="buttons">
+        <a href="{% url "project_update" project.pk %}" class="button btn-update">
+          <span class="icon">
+            <i class="fas fa-edit"></i>
+          </span>
+        </a>
+        <a href="{% url 'project_delete' project.pk %}" class="button btn-delete">
+          <span class="icon">
+            <i class="fas fa-trash-alt"></i>
+          </span>
+        </a>
+    </section>
+
+    <section class="right-info">
+    <div class="detail_about">
+      <h2>About This Project</h2>
+      <p>{{project.about}}</p>
+    </div>
+
+    <h2>Project Owner</h2>
+      <div class="project-owner">
+        <div class="card" id="project-owner-card">
+          <div class="img">
+            <img src="{{profile.project_owner.image}}" alt="{{profile.user}}" class="square-img" />
+          </div>
+          <div class="info">
+            <p>{{profile.location}}</p>
+          </div>
+        </div>
+      </div>
+
+    <div class="project-container">
+      <h2>Project Contributors</h2>
+        <div class="collaborator-keeper">
+        {% for profile in user.projects_collab.all %}
+          <div class="card">
+          <a href="{% url 'profile' profile.pk %}">
+            <div class="img">
+              <img src="{{profile.image}}" alt="{{profile.user}}" class="square-img" />
+            </div>
+            </a>
+            <div class="info">
+              <p>{{profile.user}}</p>
+            </div>
+          </div>
+        {% empty %}
+        <article class="message">
+          <div class="message-header">
+            <h5>No Contributors</h5>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+    </section>
+  </container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+
+{% block header %}Project {{project.title}}{% endblock header %}
+{% block content %}
 <div class="detail__img">
   <img src="{{project.img}}" alt="Image of {{project}}" />
 </div>
@@ -44,8 +161,8 @@
     <p>{{skill.name}}</p>
     {% endfor %}
   </div>
-</div>
+</div> {% endcomment %}
 
-{% endblock %}
+{% endblock content %}
 
 
