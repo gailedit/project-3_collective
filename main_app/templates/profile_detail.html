@@ -67,7 +67,16 @@
 
 
     <div class="project-container">
-      <h2>My Projects</h2>
+      <header>
+        <h2>My Projects</h2>
+          <div class="detail__container">
+            <a href="{% url 'project_create' user.pk %}" class="button btn-create">
+              <span class="icon">
+                <i class="far fa-plus-square"></i>
+              </span>
+            </a>
+          </div>
+        </header>
         <div class="my-project-keeper">
         {% for project in user.projects.all %}
           <div class="card">
@@ -86,15 +95,10 @@
             <h5>No Projects Available</h5>
           </div>
         </article>
-        <div class="detail__container">
-          <a href="{% url 'project_create' user.pk %}" class="button btn-create">
-            <span class="icon">
-              <i class="far fa-plus-square"></i>
-            </span>
-          </a>
-        </div>
+
         {% endfor %}
         </div>
+
       <h2>Collaborative Projects</h2>
         <div class="my-project-keeper">
         {% for project in user.projects_collab.all %}

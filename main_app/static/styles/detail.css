@@ -7,7 +7,7 @@
 
 .page .left-info {
   width: 35%;
-  max-width: 320px;
+  max-width: 340px;
   margin: 0 25px;
   padding: 20px;
 }
@@ -27,6 +27,29 @@
 
 .page .right-info .detail_about p {
   padding: 15px;
+}
+
+.page .right-info header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.page .right-info header .detail__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 5px 25px;
+  padding-top: 5px;
+}
+
+.page .right-info header .btn-create {
+  font-size: 24px;
 }
 
 .page .right-info .project-container {

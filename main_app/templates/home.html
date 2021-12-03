@@ -20,6 +20,28 @@
 
 {% block content %}
 
+  {% comment %} <div class="project-container">
+    <h2>Recent Projects</h2>
+      <div class="project-keeper">
+      {% for project in projects.all %}
+        <div class="card">
+          <a href="{% url 'project' project.pk %}">
+          <div class="img">
+            <img src="{{project.img}}" alt="{{project.title}}" class="square-img" />
+          </div>
+          </a>
+          <div class="info">
+            <p>{{project.title}}</p>
+          </div>
+        </div>
+      {% empty %}
+      <article class="message">
+        <div class="message-header">
+          <h5>No Projects Available</h5>
+        </div>
+      </article>
+    {% endfor %} {% endcomment %}
+
 <div class="container-slider">
   <h2>Recent Projects</h2>
   <div class="carousel" id="project-carousel">
