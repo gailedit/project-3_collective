@@ -1,38 +1,79 @@
-const carousel = document.querySelector('.carousel');
-const slider = document.querySelector('.slider');
+// project carousel
+const project_carousel = document.querySelector('#project-carousel');
+const project_slider = document.querySelector('#project-slider');
 
-const next = document.querySelector('.next');
-const prev = document.querySelector('.prev');
+const project_next = document.querySelector('#project-next-btn');
+const project_prev = document.querySelector('#project-prev-btn');
 let direction;
 
-next.addEventListener('click', function() {
+project_next.addEventListener('click', function() {
   direction = -1;
-  carousel.style.justifyContent = 'flex-start';
-  slider.style.transform = 'translate(-20%)';  
+  project_carousel.style.justifyContent = 'flex-start';
+  project_slider.style.transform = 'translate(-30%)';  
 });
 
-prev.addEventListener('click', function() {
+project_prev.addEventListener('click', function() {
   if (direction === -1) {
-    direction = 1;
-    slider.appendChild(slider.firstElementChild);
+    direction = -1;
+    project_slider.prependChild(project_slider.firstElementChild);
   }
-  carousel.style.justifyContent = 'flex-end';    
-  slider.style.transform = 'translate(20%)';  
+  project_carousel.style.justifyContent = 'flex-end';    
+  project_slider.style.transform = 'translate(30%)';  
   
 });
 
-slider.addEventListener('transitionend', function() {
-  // get the last element and append it to the front
+project_slider.addEventListener('transitionend', function() {
+  // get the last element and prepend it to the front
   
   if (direction === 1) {
-    slider.prepend(slider.lastElementChild);
+    project_slider.prepend(project_slider.lastElementChild);
   } else {
-    slider.appendChild(slider.firstElementChild);
+    project_slider.appendChild(project_slider.firstElementChild);
   }
-  
-  slider.style.transition = 'none';
-  slider.style.transform = 'translate(0)';
+
+  project_slider.style.transition = 'none';
+  project_slider.style.transform = 'translate(0)';
   setTimeout(() => {
-    slider.style.transition = 'all 0.5s';
+    project_slider.style.transition = 'all 0.5s';
+  })
+}, false);
+
+// profile carousel
+const profile_carousel = document.querySelector('#profile-carousel');
+const profile_slider = document.querySelector('#profile-slider');
+
+const profile_next = document.querySelector('#profile-next-btn');
+const profile_prev = document.querySelector('#profile-prev-btn');
+let direction;
+
+profile_next.addEventListener('click', function() {
+  direction = -1;
+  profile_carousel.style.justifyContent = 'flex-start';
+  profile_slider.style.transform = 'translate(-30%)';  
+});
+
+profile_prev.addEventListener('click', function() {
+  if (direction === -1) {
+    direction = -1;
+    profile_slider.prependChild(profile_slider.firstElementChild);
+  }
+  profile_carousel.style.justifyContent = 'flex-end';    
+  profile_slider.style.transform = 'translate(30%)';  
+  
+});
+
+profile_slider.addEventListener('transitionend', function() {
+  // get the last element and prepend it to the front
+  
+  if (direction === 1) {
+    profile_slider.prepend(profile_slider.lastElementChild);
+  } else {
+    profile_slider.appendChild(profile_slider.firstElementChild);
+  }
+
+  profile_slider.style.transition = 'none';
+  profile_slider.style.transform = 'translate(0)';
+  setTimeout(() => {
+    profile_slider.style.transition = 'all 0.5s';
   })
 }, false);

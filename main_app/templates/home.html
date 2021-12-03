@@ -21,25 +21,55 @@
 {% block content %}
 
 <div class="container-slider">
-  <div class="carousel">
-    <div class="slider">
+  <h2>Recent Projects</h2>
+  <div class="carousel" id="project-carousel">
+    <div class="slider" id="project-slider">
       {% for project in projects %}
       <section class="card-container">
+        <a href={% url 'project' project.pk %} class="carousel-card-link">
         <div class="card">
           <div class="img">
-            <img src="{{project.img}}" alt="{{project.title}}" class="carousel-img" />
+            <img src="{{project.img}}" alt="{{project.title}}" class="carousel-img square-img" />
           </div>
           <div class="info">
             <p>{{project.title}}</p>
           </div>
         </div>
+        </a>
       </section>
       {% endfor %}
       
     </div>
     <div class="controls">
-      <button class="next">next</button>
-      <button class="prev">prev</button>
+      <button class="next" id="project-next-btn">next</button>
+      <button class="prev" id="project-prev-btn">prev</button>
+    </div>
+  </div>
+</div>
+
+<div class="container-slider">
+  <h2>Fellow Creators</h2>
+  <div class="carousel" id="profile-carousel">
+    <div class="slider" id="profile-slider">
+      {% for profile in profiles %}
+      <section class="card-container">
+        <a href={% url 'profile' profile.pk %} class="carousel-card-link">
+        <div class="card">
+          <div class="img">
+            <img src="{{profile.image}}" alt="{{profile.user}}" class="carousel-img square-img" />
+          </div>
+          <div class="info">
+            <p>{{profile.user}}</p>
+          </div>
+        </div>
+        </a>
+      </section>
+      {% endfor %}
+      
+    </div>
+    <div class="controls">
+      <button class="next" id="profile-next-btn">next</button>
+      <button class="prev" id="profile-prev-btn">prev</button>
     </div>
   </div>
 </div>
@@ -50,37 +80,6 @@
 
 
 
-
-
-
-
-        
-          {% comment %} <div class="card">
-            <a href="{% url 'project' project.pk %}">
-            <div class="img">
-              <img src="{{project.img}}" alt="{{project.title}}" />
-            </div>
-            <div class="info">
-              <p class="card-header-title">{{project.title}}</p>
-          </div> {% endcomment %}
-        
-
-
-
-
-          {% comment %} <div class="card">
-            <div class="card-image">
-              <figure class="project-pic-square"> 
-                <img src="{{project.img}}" alt="{{project.title}}" />
-              </figure>
-            </div>
-            <div class="card-header">
-              <p class="card-header-title">{{project.title}}</p>
-            </div>
-          </div>
-        </a>
-      </div>
-      {% endcomment %}
 
 
 

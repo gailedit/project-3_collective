@@ -1,13 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600&display=swap");
 /* === Color Variables === */
+:root {
+  --activenav: green;
+  --pink: #FF70A6;
+  --mediumorange: #FF9770;
+  --lightorange: #FFD670;
+  --neonyellow: #E9FF70;
+  --lightpink: #f87dac;
+}
+
 /* === CSS Reset === */
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
-  border: 1px solid gold;
   font-family: Arial, Helvetica, sans-serif;
   vertical-align: baseline;
   list-style: none;
@@ -71,7 +79,7 @@ body {
 }
 
 .navbar .navbar-links li:hover {
-  background-color: rebeccapurple;
+  background-color: var(--activenav);
 }
 
 .navbar .navbar-links .nav-item {
@@ -123,7 +131,7 @@ body {
 }
 
 .dropdown:hover {
-  background-color: #555;
+  background-color: var(--activenav);
   color: white;
 }
 
@@ -204,10 +212,93 @@ main {
   padding: 20px 50px 29px 50px;
 }
 
-h1 {
-  font-size: 2em;
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Cairo', sans-serif;
   font-weight: 600;
+}
+
+.left-info {
+  width: 350px;
+  border: 1px solid green;
+}
+
+.card {
+  max-width: 245px;
+  height: 100%;
+  border: 1px solid #ccc;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.card .img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -o-object-fit: contain;
+     object-fit: contain;
+  max-height: 245px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 30px;
+}
+
+.card .img .square-img {
+  width: 200px;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card .info {
+  -ms-flex-preferred-size: 40px;
+      flex-basis: 40px;
+  background: #333;
+  border-radius: 0 0 10px 10px;
+  color: #fff;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-decoration: none;
+}
+
+.skill-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.skill-container .skill-keeper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.skill-container .skill-keeper .skill-card {
+  padding: 7px;
+  border-radius: 7px;
+  margin: 6px;
+  background-color: lightseagreen;
 }
 
 /* === Footer === */
